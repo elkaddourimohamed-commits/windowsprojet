@@ -1,0 +1,1 @@
+Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3" | Select-Object DeviceID,VolumeName,@{n='SizeGB';e={[math]::Round($_.Size/1GB,2)}},@{n='FreeGB';e={[math]::Round($_.FreeSpace/1GB,2)}},@{n='FreePercent';e={if($_.Size){[math]::Round(100*$_.FreeSpace/$_.Size,1)}else{0}}} | Format-Table -AutoSize
